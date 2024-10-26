@@ -36,17 +36,39 @@ addBookToTheLibrary(lotr);
 
 function showBooks() {
     const divShowBooks = document.getElementById("show-books");
-    divShowBooks.innerHTML = '';
+    divShowBooks.innerHTML = ''; // Refresh list
+    let index = 0;
     myLibrary.forEach((book) => {
         divShowBooks.innerHTML += "<b>Title:</b> " + book.title 
-            + BREAK_TAG
-            + "<b>Author:</b> " + book.author 
-            + BREAK_TAG 
-            + "<b>Number of Pages:</b> " + book.noPages 
-            + BREAK_TAG
-            + "<b>Read status:</b> " + book.readSt;
+        + BREAK_TAG
+        + "<b>Author:</b> " + book.author 
+        + BREAK_TAG 
+        + "<b>Number of Pages:</b> " + book.noPages 
+        + BREAK_TAG
+        + "<b>Read status:</b> " + book.readSt +
+        "<button name='remove' id='btn-book-"+ index + "'>🗑️</button>";
+        index++;
     });
 }
+
+function deleteBook(index) {
+    myLibrary.splice(index, 1);
+    showBooks();
+}
+
+/**
+ * Event delegation.
+ * https://stackoverflow.com/questions/66193592/how-i-know-which-button-been-clicked-in-class-of-buttons
+ */
+document.addEventListener("click", (evt) => {
+    let element = evt.target;
+    let elementID = element.id;
+    if(elementID.includes("btn-book")) {
+        let indexToRemove = elementID.substring(9);
+        console.log(`Index to remove ${indexToRemove}`);
+        deleteBook(indexToRemove);
+    }
+});
 
 const addBookButton = document.getElementById("add-book");
 addBookButton.addEventListener("click", () => {
