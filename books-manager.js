@@ -36,6 +36,7 @@ addBookToTheLibrary(lotr);
 
 function showBooks() {
     const divShowBooks = document.getElementById("show-books");
+    divShowBooks.innerHTML = '';
     myLibrary.forEach((book) => {
         divShowBooks.innerHTML += "<b>Title:</b> " + book.title 
             + BREAK_TAG
@@ -47,5 +48,17 @@ function showBooks() {
     });
 }
 
-console.table(myLibrary);
+const addBookButton = document.getElementById("add-book");
+addBookButton.addEventListener("click", () => {
+    const bookName = document.getElementById("book-name").value;
+    const bookAuthor = document.getElementById("author-name").value;
+    const bookNoOfPages = document.getElementById("number-of-pages").value;
+    const bookReadSt = document.getElementById("read-status").value;
+
+    const newBook = new Book(bookName, bookAuthor, bookNoOfPages, bookReadSt);
+    addBookToTheLibrary(newBook);
+    showBooks();
+});
+
+// console.table(myLibrary);
 showBooks();
