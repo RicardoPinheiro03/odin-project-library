@@ -1,4 +1,5 @@
 const myLibrary = [];
+const BREAK_TAG = "<br>";
 
 /**
  * Book constructor.
@@ -27,5 +28,24 @@ Book.prototype.getInfo = function() {
  * @param {*} book 
  */
 function addBookToTheLibrary(book) {
-    myLibrary.append(book);
+    myLibrary.push(book);
 }
+
+const lotr = new Book("LOTR", "Tolkien", 300, true);
+addBookToTheLibrary(lotr);
+
+function showBooks() {
+    const divShowBooks = document.getElementById("show-books");
+    myLibrary.forEach((book) => {
+        divShowBooks.innerHTML += "<b>Title:</b> " + book.title 
+            + BREAK_TAG
+            + "<b>Author:</b> " + book.author 
+            + BREAK_TAG 
+            + "<b>Number of Pages:</b> " + book.noPages 
+            + BREAK_TAG
+            + "<b>Read status:</b> " + book.readSt;
+    });
+}
+
+console.table(myLibrary);
+showBooks();
